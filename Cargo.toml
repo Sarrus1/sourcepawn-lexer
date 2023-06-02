@@ -3,6 +3,9 @@ name = "sourcepawn_lexer"
 version = "0.1.0"
 edition = "2021"
 description = "Lossless SourcePawn lexer"
+documentation = "https://docs.rs/sourcepawn_lexer"
+readme = "README.md"
+repository = "https://github.com/Sarrus1/sourcepawn-lexer"
 license = "MIT"
 include = ["src/**/*", "Cargo.toml"]
 
@@ -22,3 +25,4 @@ minreq = { version = "2.7.0", features = ["https"] }
 [[bench]]
 name = "bench_main"
 harness = false
+path = "benches/bench_main.rs"

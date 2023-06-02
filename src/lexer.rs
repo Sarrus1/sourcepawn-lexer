@@ -5,17 +5,43 @@ use regex::Regex;
 
 use crate::{token::Token, token_kind::TokenKind, Comment, Literal, PreprocDir};
 
+/// Difference between the start of the token the delta is attached to and the end of the previous token.
+///
+/// # Example
+/// ```cpp
+/// int foo;
+/// ```
+///
+/// The delta of `foo` is the difference between the start of `foo` and the end of `int`.
+/// Its value is:
+/// ```rust
+/// Delta {
+///    line: 0,
+///    col: 1,
+/// }
+/// ```
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Default)]
 pub struct Delta {
+    /// Difference in lines.
     pub line: i32,
+
+    /// Difference in columns.
     pub col: i32,
 }
 
+/// A symbol is a token with a [range](Range) and a [delta](Delta).
 #[derive(Debug, Clone, Eq)]
 pub struct Symbol {
+    /// Kind of the token.
     pub token_kind: TokenKind,
+
+    /// Text of the token. Optional because the text of builtin tokens can be inferred from their kind.
     text: Option<String>,
+
+    /// Range of the token.
     pub range: Range,
+
+    /// Delta of the token.
     pub delta: Delta,
 }
 
@@ -159,6 +185,17 @@ impl Symbol {
     }
 }
 
+/// Sourcepawn lexer.
+///
+/// # Example
+/// ```rust
+/// use sourcepawn_lsp::lexer::SourcepawnLexer;
+///
+/// let lexer = SourcepawnLexer::new("int foo = 0;");
+/// for symbol in lexer {
+///    println!("{:#?}", symbol);
+/// }
+/// ```
 #[derive(Debug, Clone)]
 pub struct SourcepawnLexer<'a> {
     lexer: Lexer<'a, Token>,
@@ -170,6 +207,14 @@ pub struct SourcepawnLexer<'a> {
 }
 
 impl SourcepawnLexer<'_> {
+    /// Creates a new Sourcepawn lexer.
+    ///
+    /// # Example
+    /// ```rust
+    /// use sourcepawn_lsp::lexer::SourcepawnLexer;
+    ///
+    /// let lexer = SourcepawnLexer::new("int foo = 0;");
+    /// ```
     pub fn new(input: &str) -> SourcepawnLexer {
         SourcepawnLexer {
             lexer: Token::lexer(input),
@@ -181,6 +226,16 @@ impl SourcepawnLexer<'_> {
         }
     }
 
+    /// Returns whether or not we are in a preprocessing statement.
+    ///
+    /// # Example
+    /// ```cpp
+    /// #define FOO 1
+    /// int foo;
+    /// ```
+    ///
+    /// In this example, everything before the line `int foo;` is considered preprocessing.
+    /// See the [tests](https://github.com/Sarrus1/sourcepawn-lexer/blob/main/tests/define.rs) for more examples.
     pub fn in_preprocessor(&self) -> bool {
         self.in_preprocessor && !self.eof
     }
