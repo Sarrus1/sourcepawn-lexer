@@ -2,9 +2,9 @@
 name = "sourcepawn_lexer"
 version = "0.1.0"
 edition = "2021"
-description = "A lossless SourcePawn lexer"
+description = "Lossless SourcePawn lexer"
 license = "MIT"
-exclude = [".gitignore"]
+include = ["src/**/*", "Cargo.toml"]
 
 [lib]
 doctest = false
