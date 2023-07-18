@@ -257,6 +257,9 @@ pub enum Token {
     #[token("/")]
     Slash,
 
+    #[token("#")]
+    Stringize,
+
     #[token("%")]
     Percent,
 

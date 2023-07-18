@@ -173,6 +173,9 @@ pub enum Operator {
     /// `/`
     Slash,
 
+    /// `#`
+    Stringize,
+
     /// `%`
     Percent,
 
@@ -275,6 +278,7 @@ impl Operator {
             self::Operator::Minus => "-",
             self::Operator::Star => "*",
             self::Operator::Slash => "/",
+            self::Operator::Stringize => "#",
             self::Operator::Percent => "%",
             self::Operator::Ampersand => "&",
             self::Operator::Bitor => "|",
@@ -556,6 +560,7 @@ impl TryFrom<Token> for TokenKind {
             Token::Minus => TokenKind::Operator(Operator::Minus),
             Token::Star => TokenKind::Operator(Operator::Star),
             Token::Slash => TokenKind::Operator(Operator::Slash),
+            Token::Stringize => TokenKind::Operator(Operator::Stringize),
             Token::Percent => TokenKind::Operator(Operator::Percent),
             Token::Ampersand => TokenKind::Operator(Operator::Ampersand),
             Token::Bitor => TokenKind::Operator(Operator::Bitor),
