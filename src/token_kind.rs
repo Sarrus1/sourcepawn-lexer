@@ -1,6 +1,6 @@
 use crate::token::Token;
 
-#[derive(Debug, Clone, PartialEq, Eq)]
+#[derive(Clone, Copy, PartialEq, Eq, PartialOrd, Ord, Hash, Debug)]
 pub enum Literal {
     /// Integer literal.
     ///
@@ -136,7 +136,7 @@ impl Literal {
     }
 }
 
-#[derive(Debug, Clone, PartialEq, Eq)]
+#[derive(Clone, Copy, PartialEq, Eq, PartialOrd, Ord, Hash, Debug)]
 pub enum Comment {
     /// Line comments.
     ///
@@ -156,7 +156,7 @@ pub enum Comment {
     BlockComment,
 }
 
-#[derive(Debug, Clone, PartialEq, Eq)]
+#[derive(Clone, Copy, PartialEq, Eq, PartialOrd, Ord, Hash, Debug)]
 pub enum Operator {
     /// `...`
     Ellipses,
@@ -315,7 +315,7 @@ impl Operator {
     }
 }
 
-#[derive(Debug, Clone, PartialEq, Eq)]
+#[derive(Clone, Copy, PartialEq, Eq, PartialOrd, Ord, Hash, Debug)]
 pub enum PreprocDir {
     /// `#define`
     MDefine,
@@ -398,7 +398,8 @@ impl PreprocDir {
     }
 }
 
-#[derive(Debug, Clone, PartialEq, Eq)]
+#[derive(Clone, Copy, PartialEq, Eq, PartialOrd, Ord, Hash, Debug)]
+#[repr(u16)]
 pub enum TokenKind {
     Identifier,
     Literal(Literal),
