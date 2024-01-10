@@ -424,6 +424,8 @@ pub enum TokenKind {
     Enum,
     False,
     Float,
+    OldFloat,
+    OldString,
     For,
     Forward,
     Functag,
@@ -467,6 +469,7 @@ pub enum TokenKind {
     Colon,
     Scope,
     Dot,
+    Underscore,
 
     Unknown,
 
@@ -507,6 +510,8 @@ impl TryFrom<Token> for TokenKind {
             Token::Enum => TokenKind::Enum,
             Token::False => TokenKind::False,
             Token::Float => TokenKind::Float,
+            Token::OldFloat => TokenKind::OldFloat,
+            Token::OldString => TokenKind::OldString,
             Token::For => TokenKind::For,
             Token::Forward => TokenKind::Forward,
             Token::Functag => TokenKind::Functag,
@@ -605,6 +610,7 @@ impl TryFrom<Token> for TokenKind {
             Token::Colon => TokenKind::Colon,
             Token::Scope => TokenKind::Scope,
             Token::Dot => TokenKind::Dot,
+            Token::Underscore => TokenKind::Underscore,
             Token::Unknown => TokenKind::Unknown,
         };
 

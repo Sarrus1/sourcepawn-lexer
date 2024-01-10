@@ -99,6 +99,8 @@ impl Symbol {
             TokenKind::Enum => "enum",
             TokenKind::False => "false",
             TokenKind::Float => "float",
+            TokenKind::OldFloat => "Float",
+            TokenKind::OldString => "String",
             TokenKind::For => "for",
             TokenKind::Forward => "forward",
             TokenKind::Functag => "functag",
@@ -143,6 +145,7 @@ impl Symbol {
             TokenKind::Scope => "::",
             TokenKind::Dot => ".",
             TokenKind::Unknown => "",
+            TokenKind::Underscore => "_",
             TokenKind::Eof => "\0",
         }
         .to_string()

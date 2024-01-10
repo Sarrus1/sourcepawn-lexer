@@ -95,6 +95,12 @@ pub enum Token {
     #[token("float")]
     Float,
 
+    #[token("Float")]
+    OldFloat,
+
+    #[token("String")]
+    OldString,
+
     #[token("for")]
     For,
 
@@ -388,6 +394,9 @@ pub enum Token {
 
     #[token(".")]
     Dot,
+
+    #[token("_")]
+    Underscore,
 
     #[error]
     #[regex(r"(?&ws)+", logos::skip)]
