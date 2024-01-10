@@ -38,7 +38,7 @@ pub fn lex_pragma_arguments(lex: &mut Lexer<Token>) -> Option<()> {
                 }
                 _ => {}
             }
-            offset += 1;
+            offset += ch.len_utf8();
         } else if looking_for_newline {
             // Lookahead for a newline without any non-whitespace characters.
             if next_ch == '\n' || next_ch == '\r' {
@@ -46,7 +46,7 @@ pub fn lex_pragma_arguments(lex: &mut Lexer<Token>) -> Option<()> {
                 return Some(());
             }
             if next_ch.is_whitespace() {
-                offset += 1;
+                offset += ch.len_utf8();
             } else {
                 // Non-whitespace character found, bump the lexer and continue.
                 lex.bump(offset + 2);
@@ -83,7 +83,7 @@ pub fn lex_pragma_arguments(lex: &mut Lexer<Token>) -> Option<()> {
                 },
                 _ => {}
             }
-            lex.bump(1);
+            lex.bump(ch.len_utf8());
         }
     }
 

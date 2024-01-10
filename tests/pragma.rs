@@ -248,3 +248,22 @@ fn pragma_line_continuation_carriage_return() {
     assert_token_eq!(lexer, TokenKind::Newline, "\n", 1, 3, 2, 0, 0, 0);
     assert_token_eq!(lexer, TokenKind::Eof, "\0", 2, 0, 2, 0, 0, 0);
 }
+
+#[test]
+fn pragma_unicode() {
+    let input = "#pragma deprecated \"Устаревшая функция. Плагин автоматически очищает всё, что создал другой выгруженный плагин.\"";
+
+    let mut lexer = SourcepawnLexer::new(input);
+    assert_token_eq!(
+        lexer,
+        TokenKind::PreprocDir(PreprocDir::MPragma),
+        "#pragma deprecated \"Устаревшая функция. Плагин автоматически очищает всё, что создал другой выгруженный плагин.\"",
+        0,
+        0,
+        0,
+        190,
+        0,
+        0
+    );
+    assert_token_eq!(lexer, TokenKind::Eof, "\0", 0, 190, 0, 190, 0, 0);
+}
