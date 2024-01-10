@@ -4,16 +4,17 @@
 
 ### Fixed
 
--   Fixed invalid lexer bump panic (thanks @MAGNAT2645 for replicating the issue!).
+- Fixed invalid lexer bump panic (thanks @MAGNAT2645 for replicating the issue!).
+- Fixed missing keywords (see #1).
 
 ## [0.1.1]
 
 ### Added
 
--   Added support for the Stringize operator (#).
+- Added support for the Stringize operator (#).
 
 ## [0.1.0]
 
 ### Added
 
--   Added Sourcepawn lexer build with Logos.
+- Added Sourcepawn lexer build with Logos.
