@@ -4,6 +4,7 @@ use lsp_types::{Position, Range};
 use regex::Regex;
 
 use crate::{token::Token, token_kind::TokenKind, Comment, Literal, PreprocDir};
+use std::hash::{Hash, Hasher};
 
 /// Difference between the start of the token the delta is attached to and the end of the previous token.
 ///
@@ -20,7 +21,7 @@ use crate::{token::Token, token_kind::TokenKind, Comment, Literal, PreprocDir};
 ///    col: 1,
 /// }
 /// ```
-#[derive(Debug, Clone, Copy, PartialEq, Eq, Default)]
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Default, Hash)]
 pub struct Delta {
     /// Difference in lines.
     pub line: i32,
@@ -43,6 +44,18 @@ pub struct Symbol {
 
     /// Delta of the token.
     pub delta: Delta,
+}
+
+impl Hash for Symbol {
+    fn hash<H: Hasher>(&self, state: &mut H) {
+        self.token_kind.hash(state);
+        self.text().hash(state);
+        self.range.start.line.hash(state);
+        self.range.start.character.hash(state);
+        self.range.end.line.hash(state);
+        self.range.end.character.hash(state);
+        self.delta.hash(state);
+    }
 }
 
 impl PartialEq for Symbol {
