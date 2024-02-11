@@ -21,7 +21,7 @@ use std::hash::{Hash, Hasher};
 ///    col: 1,
 /// }
 /// ```
-#[derive(Debug, Clone, Copy, PartialEq, Eq, Default, Hash)]
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Default, Hash, PartialOrd, Ord)]
 pub struct Delta {
     /// Difference in lines.
     pub line: i32,

@@ -1,5 +1,11 @@
 ## Release Notes
 
+## [0.1.3]
+
+### Added
+
+- Made `Symbol` and `Delta` hashable.
+
 ## [0.1.2]
 
 ### Fixed
