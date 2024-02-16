@@ -2,6 +2,7 @@ use lazy_static::lazy_static;
 use logos::{Lexer, Logos};
 use lsp_types::{Position, Range};
 use regex::Regex;
+use smol_str::SmolStr;
 
 use crate::{token::Token, token_kind::TokenKind, Comment, Literal, PreprocDir};
 use std::hash::{Hash, Hasher};
@@ -37,7 +38,7 @@ pub struct Symbol {
     pub token_kind: TokenKind,
 
     /// Text of the token. Optional because the text of builtin tokens can be inferred from their kind.
-    text: Option<String>,
+    text: Option<SmolStr>,
 
     /// Range of the token.
     pub range: Range,
@@ -71,13 +72,13 @@ impl Symbol {
     pub fn new(token_kind: TokenKind, text: Option<&str>, range: Range, delta: Delta) -> Self {
         Self {
             token_kind,
-            text: text.map(|s| s.to_string()),
+            text: text.map(|s| s.to_string()).map(SmolStr::from),
             range,
             delta,
         }
     }
 
-    pub fn text(&self) -> String {
+    pub fn text(&self) -> SmolStr {
         match &self.token_kind {
             TokenKind::Operator(op) => return op.text(),
             TokenKind::PreprocDir(dir) => {
@@ -161,7 +162,7 @@ impl Symbol {
             TokenKind::Underscore => "_",
             TokenKind::Eof => "\0",
         }
-        .to_string()
+        .into()
     }
 
     pub fn to_int(&self) -> Option<u32> {
@@ -172,18 +173,18 @@ impl Symbol {
         None
     }
 
-    pub fn inline_text(&self) -> String {
+    pub fn inline_text(&self) -> SmolStr {
         let text = self.text();
         match &self.token_kind {
             TokenKind::Literal(lit) => match lit {
                 Literal::StringLiteral | Literal::CharLiteral => {
-                    return text.replace("\\\n", "").replace("\\\r\n", "")
+                    return text.replace("\\\n", "").replace("\\\r\n", "").into()
                 }
                 _ => (),
             },
             TokenKind::Comment(com) => {
                 if *com == Comment::BlockComment {
-                    return text.replace('\n', "").replace("\r\n", "");
+                    return text.replace('\n', "").replace("\r\n", "").into();
                 }
             }
             TokenKind::PreprocDir(dir) => {
@@ -191,7 +192,7 @@ impl Symbol {
                     *dir,
                     PreprocDir::MPragma | PreprocDir::MInclude | PreprocDir::MTryinclude
                 ) {
-                    return text.replace("\\\n", "").replace("\\\r\n", "");
+                    return text.replace("\\\n", "").replace("\\\r\n", "").into();
                 }
             }
             _ => (),
@@ -319,7 +320,7 @@ impl Iterator for SourcepawnLexer<'_> {
             | Token::LineComment
             | Token::MPragma
             | Token::MInclude
-            | Token::MTryinclude => Some(self.lexer.slice().to_string()),
+            | Token::MTryinclude => Some(SmolStr::from(self.lexer.slice())),
             _ => None,
         };
 

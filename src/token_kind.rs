@@ -1,3 +1,5 @@
+use smol_str::SmolStr;
+
 use crate::token::Token;
 
 #[derive(Clone, Copy, PartialEq, Eq, PartialOrd, Ord, Hash, Debug)]
@@ -271,7 +273,7 @@ pub enum Operator {
 }
 
 impl Operator {
-    pub fn text(&self) -> String {
+    pub fn text(&self) -> SmolStr {
         match self {
             self::Operator::Ellipses => "...",
             self::Operator::Plus => "+",
@@ -311,7 +313,7 @@ impl Operator {
             self::Operator::Not => "!",
             self::Operator::Tilde => "~",
         }
-        .to_string()
+        .into()
     }
 }
 
@@ -373,7 +375,7 @@ pub enum PreprocDir {
 }
 
 impl PreprocDir {
-    pub fn text(&self) -> String {
+    pub fn text(&self) -> SmolStr {
         match self {
             self::PreprocDir::MDefine => "#define",
             self::PreprocDir::MDeprecate => "#deprecate",
@@ -394,7 +396,7 @@ impl PreprocDir {
             self::PreprocDir::MTryinclude => "#try_include",
             self::PreprocDir::MUndef => "#undef",
         }
-        .to_string()
+        .into()
     }
 }
 

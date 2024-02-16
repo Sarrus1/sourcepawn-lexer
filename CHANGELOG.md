@@ -1,5 +1,11 @@
 ## Release Notes
 
+## [0.2.0]
+
+### Added
+
+- Switched to [smol_str](https://crates.io/crates/smol_str).
+
 ## [0.1.3]
 
 ### Added
