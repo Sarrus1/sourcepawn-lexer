@@ -1,5 +1,11 @@
 ## Release Notes
 
+## [0.2.1]
+
+### Fixed
+
+- Invalid float literal lexing.
+
 ## [0.2.0]
 
 ### Added
