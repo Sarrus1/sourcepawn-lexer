@@ -1,0 +1,46 @@
+---
+source: tests/include.rs
+assertion_line: 21
+expression: collect_tokens(&mut lexer)
+snapshot_kind: text
+---
+[
+  {
+    "kind": {
+      "Literal": "IntegerLiteral"
+    },
+    "text": "1",
+    "range_start": 0,
+    "range_end": 1,
+    "delta": 0,
+    "in_preprocessor": false
+  },
+  {
+    "kind": {
+      "Operator": "Lt"
+    },
+    "text": "<",
+    "range_start": 2,
+    "range_end": 3,
+    "delta": 1,
+    "in_preprocessor": false
+  },
+  {
+    "kind": {
+      "Literal": "IntegerLiteral"
+    },
+    "text": "2",
+    "range_start": 4,
+    "range_end": 5,
+    "delta": 1,
+    "in_preprocessor": false
+  },
+  {
+    "kind": "Eof",
+    "text": "\u0000",
+    "range_start": 5,
+    "range_end": 5,
+    "delta": 0,
+    "in_preprocessor": false
+  }
+]

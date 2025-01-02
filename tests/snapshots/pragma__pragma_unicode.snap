@@ -1,0 +1,26 @@
+---
+source: tests/pragma.rs
+assertion_line: 104
+expression: collect_tokens(&mut lexer)
+snapshot_kind: text
+---
+[
+  {
+    "kind": {
+      "PreprocDir": "MPragma"
+    },
+    "text": "#pragma deprecated \"Устаревшая функция. Плагин автоматически очищает всё, что создал другой выгруженный плагин.\"",
+    "range_start": 0,
+    "range_end": 190,
+    "delta": 0,
+    "in_preprocessor": true
+  },
+  {
+    "kind": "Eof",
+    "text": "\u0000",
+    "range_start": 190,
+    "range_end": 190,
+    "delta": 0,
+    "in_preprocessor": false
+  }
+]

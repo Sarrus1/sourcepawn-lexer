@@ -1,8 +1,9 @@
+use serde::{Deserialize, Serialize};
 use smol_str::SmolStr;
 
 use crate::token::Token;
 
-#[derive(Clone, Copy, PartialEq, Eq, PartialOrd, Ord, Hash, Debug)]
+#[derive(Clone, Copy, PartialEq, Eq, PartialOrd, Ord, Hash, Debug, Serialize, Deserialize)]
 pub enum Literal {
     /// Integer literal.
     ///
@@ -138,7 +139,7 @@ impl Literal {
     }
 }
 
-#[derive(Clone, Copy, PartialEq, Eq, PartialOrd, Ord, Hash, Debug)]
+#[derive(Clone, Copy, PartialEq, Eq, PartialOrd, Ord, Hash, Debug, Serialize, Deserialize)]
 pub enum Comment {
     /// Line comments.
     ///
@@ -158,7 +159,7 @@ pub enum Comment {
     BlockComment,
 }
 
-#[derive(Clone, Copy, PartialEq, Eq, PartialOrd, Ord, Hash, Debug)]
+#[derive(Clone, Copy, PartialEq, Eq, PartialOrd, Ord, Hash, Debug, Serialize, Deserialize)]
 pub enum Operator {
     /// `...`
     Ellipses,
@@ -317,7 +318,7 @@ impl Operator {
     }
 }
 
-#[derive(Clone, Copy, PartialEq, Eq, PartialOrd, Ord, Hash, Debug)]
+#[derive(Clone, Copy, PartialEq, Eq, PartialOrd, Ord, Hash, Debug, Serialize, Deserialize)]
 pub enum PreprocDir {
     /// `#define`
     MDefine,
@@ -400,7 +401,7 @@ impl PreprocDir {
     }
 }
 
-#[derive(Clone, Copy, PartialEq, Eq, PartialOrd, Ord, Hash, Debug)]
+#[derive(Clone, Copy, PartialEq, Eq, PartialOrd, Ord, Hash, Debug, Serialize, Deserialize)]
 #[repr(u16)]
 pub enum TokenKind {
     Identifier,
