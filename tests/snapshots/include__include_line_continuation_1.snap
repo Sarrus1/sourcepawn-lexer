@@ -1,0 +1,26 @@
+---
+source: tests/include.rs
+assertion_line: 30
+expression: collect_tokens(&mut lexer)
+snapshot_kind: text
+---
+[
+  {
+    "kind": {
+      "PreprocDir": "MInclude"
+    },
+    "text": "#include <sourcemod\\\n>",
+    "range_start": 0,
+    "range_end": 22,
+    "delta": 0,
+    "in_preprocessor": true
+  },
+  {
+    "kind": "Eof",
+    "text": "\u0000",
+    "range_start": 22,
+    "range_end": 22,
+    "delta": 0,
+    "in_preprocessor": false
+  }
+]

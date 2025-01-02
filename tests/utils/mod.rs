@@ -1,23 +1,28 @@
-#[allow(unused_macros)]
-macro_rules! assert_token_eq {
-    ($lexer:expr, $token_kind:expr, $text:expr, $start_line:expr, $start_col:expr, $end_line:expr, $end_col:expr, $delta_line:expr, $delta_col:expr) => {
-        assert_eq!(
-            $lexer.next().unwrap(),
-            Symbol::new(
-                $token_kind,
-                Some($text),
-                Range::new(
-                    Position::new($start_line, $start_col),
-                    Position::new($end_line, $end_col)
-                ),
-                Delta {
-                    line: $delta_line,
-                    col: $delta_col
-                }
-            )
-        );
-    };
+#[allow(unused_imports)]
+use serde::{Deserialize, Serialize};
+use sourcepawn_lexer::SourcepawnLexer;
+
+#[cfg_attr(test, derive(Serialize, Deserialize))]
+pub struct Output {
+    pub kind: crate::TokenKind,
+    pub text: String,
+    pub range_start: u32,
+    pub range_end: u32,
+    pub delta: crate::Delta,
+    pub in_preprocessor: bool
 }
 
-#[allow(unused_imports)]
-pub(crate) use assert_token_eq;
+pub fn collect_tokens(lexer: &mut SourcepawnLexer) -> Vec<Output> {
+    let mut res = Vec::new();
+    while let Some(symbol) = lexer.next() {
+        res.push(Output {
+            kind: symbol.token_kind,
+            text: symbol.text().to_string(),
+            range_start: symbol.range.start().into(),
+            range_end: symbol.range.end().into(),
+            delta: symbol.delta,
+            in_preprocessor: lexer.in_preprocessor()
+        });
+    }
+    res
+}

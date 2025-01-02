@@ -18,10 +18,14 @@ logos = "0.12.1"
 lsp-types = "0.94.0"
 regex = "1.7.3"
 smol_str = "0.2.1"
+serde = "1.0.147"
+serde_json = { version = "^1.0.83", features = ["preserve_order"] }
+text-size = "1.1.1"
 
 [dev-dependencies]
 criterion = "0.3"
 minreq = { version = "2.7.0", features = ["https"] }
+insta = { version = "1.28.0", features = ["glob", "redactions", "json"] }
 
 [[bench]]
 name = "bench_main"

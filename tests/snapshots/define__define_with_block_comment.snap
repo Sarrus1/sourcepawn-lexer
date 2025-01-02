@@ -1,0 +1,82 @@
+---
+source: tests/define.rs
+assertion_line: 57
+expression: collect_tokens(&mut lexer)
+snapshot_kind: text
+---
+[
+  {
+    "kind": {
+      "PreprocDir": "MDefine"
+    },
+    "text": "#define",
+    "range_start": 0,
+    "range_end": 7,
+    "delta": 0,
+    "in_preprocessor": true
+  },
+  {
+    "kind": "Identifier",
+    "text": "FOO",
+    "range_start": 8,
+    "range_end": 11,
+    "delta": 1,
+    "in_preprocessor": true
+  },
+  {
+    "kind": {
+      "Literal": "IntegerLiteral"
+    },
+    "text": "1",
+    "range_start": 12,
+    "range_end": 13,
+    "delta": 1,
+    "in_preprocessor": true
+  },
+  {
+    "kind": {
+      "Comment": "BlockComment"
+    },
+    "text": "/* */",
+    "range_start": 14,
+    "range_end": 19,
+    "delta": 1,
+    "in_preprocessor": true
+  },
+  {
+    "kind": {
+      "Operator": "Plus"
+    },
+    "text": "+",
+    "range_start": 20,
+    "range_end": 21,
+    "delta": 1,
+    "in_preprocessor": true
+  },
+  {
+    "kind": {
+      "Literal": "IntegerLiteral"
+    },
+    "text": "1",
+    "range_start": 22,
+    "range_end": 23,
+    "delta": 1,
+    "in_preprocessor": true
+  },
+  {
+    "kind": "Newline",
+    "text": "\n",
+    "range_start": 23,
+    "range_end": 24,
+    "delta": 0,
+    "in_preprocessor": false
+  },
+  {
+    "kind": "Eof",
+    "text": "\u0000",
+    "range_start": 24,
+    "range_end": 24,
+    "delta": 0,
+    "in_preprocessor": false
+  }
+]

@@ -1,0 +1,58 @@
+---
+source: tests/include.rs
+assertion_line: 13
+expression: collect_tokens(&mut lexer)
+snapshot_kind: text
+---
+[
+  {
+    "kind": {
+      "PreprocDir": "MInclude"
+    },
+    "text": "#include <sourcemod>",
+    "range_start": 0,
+    "range_end": 20,
+    "delta": 0,
+    "in_preprocessor": true
+  },
+  {
+    "kind": "Newline",
+    "text": "\n",
+    "range_start": 20,
+    "range_end": 21,
+    "delta": 0,
+    "in_preprocessor": false
+  },
+  {
+    "kind": "Int",
+    "text": "int",
+    "range_start": 21,
+    "range_end": 24,
+    "delta": 0,
+    "in_preprocessor": false
+  },
+  {
+    "kind": "Identifier",
+    "text": "foo",
+    "range_start": 25,
+    "range_end": 28,
+    "delta": 1,
+    "in_preprocessor": false
+  },
+  {
+    "kind": "Semicolon",
+    "text": ";",
+    "range_start": 28,
+    "range_end": 29,
+    "delta": 0,
+    "in_preprocessor": false
+  },
+  {
+    "kind": "Eof",
+    "text": "\u0000",
+    "range_start": 29,
+    "range_end": 29,
+    "delta": 0,
+    "in_preprocessor": false
+  }
+]

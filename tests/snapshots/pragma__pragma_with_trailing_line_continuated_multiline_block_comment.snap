@@ -1,0 +1,34 @@
+---
+source: tests/pragma.rs
+assertion_line: 78
+expression: collect_tokens(&mut lexer)
+snapshot_kind: text
+---
+[
+  {
+    "kind": {
+      "PreprocDir": "MPragma"
+    },
+    "text": "#pragma deprecated foo /* \\\n*/ bar",
+    "range_start": 0,
+    "range_end": 34,
+    "delta": 0,
+    "in_preprocessor": true
+  },
+  {
+    "kind": "Newline",
+    "text": "\n",
+    "range_start": 34,
+    "range_end": 35,
+    "delta": 0,
+    "in_preprocessor": false
+  },
+  {
+    "kind": "Eof",
+    "text": "\u0000",
+    "range_start": 35,
+    "range_end": 35,
+    "delta": 0,
+    "in_preprocessor": false
+  }
+]
