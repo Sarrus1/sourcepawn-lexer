@@ -1,5 +1,11 @@
 ## Release Notes
 
+## [0.3.0]
+
+### Added
+
+- Switched to a byte range representation format for symbol ranges.
+
 ## [0.2.1]
 
 ### Fixed
